@@ -87,7 +87,7 @@ export function BreadcrumbSeparator({
 			role="presentation"
 			{...props}
 		>
-			{children ?? <CaretRightIcon />}
+			{children ?? <CaretRightIcon className="rtl:rotate-180" />}
 		</li>
 	);
 }

@@ -19,8 +19,6 @@ import {
 
 import CartModal from "@/features/cart/components/cart-modal";
 
-import { LanguageSelector } from "./language-selector";
-
 const tooltipHandle = TooltipCreateHandle<ComponentType>();
 
 const CartContent = () => {
@@ -50,10 +48,10 @@ const ProfileContent = () => {
 export const NavActions = () => {
 	return (
 		<TooltipProvider delay={50}>
-			<div className="flex justify-end md:w-1/3">
-				<LanguageSelector onValueChange={() => {}} value="en" />
+			<div className="flex justify-end gap-1 md:w-1/3">
+				{/* <LanguageSelector onValueChange={setLocale} value={locale} /> */}
 				<TooltipTrigger
-					className="after:absolute after:left-full after:h-full after:w-1"
+					className="after:absolute after:inset-s-full after:h-full after:w-1"
 					handle={tooltipHandle}
 					payload={ProfileContent}
 					render={
@@ -67,7 +65,7 @@ export const NavActions = () => {
 					<span className="sr-only">Profile</span>
 				</TooltipTrigger>
 				<TooltipTrigger
-					className="after:absolute after:left-full after:h-full after:w-1"
+					className="after:absolute after:inset-s-full after:h-full after:w-1"
 					handle={tooltipHandle}
 					payload={FavoritesContent}
 					render={

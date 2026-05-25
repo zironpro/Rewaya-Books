@@ -1,7 +1,5 @@
 "use client";
 
-import * as React from "react";
-
 import {
 	Select,
 	SelectContent,
@@ -11,96 +9,33 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 
+import { type Locale, localeConfig, locales } from "@/lib/i18n/config";
 import { cn } from "@/lib/utils";
 
-export type Language = "en" | "ar" | "he";
-
-export type Direction = "ltr" | "rtl";
-
-export type Translations<
-	T extends Record<string, string> = Record<string, string>,
-> = Record<
-	Language,
-	{
-		dir: Direction;
-		locale?: string;
-		values: T;
-	}
->;
-
-export const languageOptions = [
-	{ value: "en", label: "English" },
-	{ value: "ar", label: "Arabic (العربية)" },
-	{ value: "he", label: "Hebrew (עברית)" },
-] as const;
-
-type LanguageContextType = {
-	language: Language;
-	setLanguage: (language: Language) => void;
-};
-
-const LanguageContext = React.createContext<LanguageContextType | undefined>(
-	undefined
-);
-
-export function LanguageProvider({
-	children,
-	defaultLanguage = "ar",
-}: {
-	children: React.ReactNode;
-	defaultLanguage?: Language;
-}) {
-	const [language, setLanguage] = React.useState<Language>(defaultLanguage);
-
-	return (
-		<LanguageContext.Provider value={{ language, setLanguage }}>
-			{children}
-		</LanguageContext.Provider>
-	);
-}
-
-export function useLanguageContext() {
-	const context = React.useContext(LanguageContext);
-	return context;
-}
-
-export function useTranslation<T extends Record<string, string>>(
-	translations: Translations<T>,
-	defaultLanguage: Language = "ar"
-) {
-	const context = useLanguageContext();
-	const [localLanguage, setLocalLanguage] =
-		React.useState<Language>(defaultLanguage);
-
-	const language = context?.language ?? localLanguage;
-	const setLanguage = context?.setLanguage ?? setLocalLanguage;
-
-	const { dir, locale, values: t } = translations[language];
-	return { language, setLanguage, dir, locale, t };
-}
+export const languageOptions = locales.map((locale) => ({
+	value: locale,
+	label: `${localeConfig[locale].label} (${localeConfig[locale].nativeLabel})`,
+}));
 
 export interface LanguageSelectorProps {
-	value: Language;
-	onValueChange: (value: Language) => void;
+	value: Locale;
+	onValueChange: (value: Locale) => void;
+	className?: string;
 }
 
 export function LanguageSelector({
 	value,
 	onValueChange,
 	className,
-	languages = ["en", "ar", "he"],
-}: LanguageSelectorProps & {
-	className?: string;
-	languages?: Language[];
-}) {
+}: LanguageSelectorProps) {
 	return (
 		<Select
 			items={languageOptions}
-			onValueChange={(value) => onValueChange(value as Language)}
+			onValueChange={(nextValue) => onValueChange(nextValue as Locale)}
 			value={value}
 		>
 			<SelectTrigger
-				className={cn("w-36", className)}
+				className={cn("w-40", className)}
 				data-name="language-selector"
 				dir="ltr"
 				size="sm"
@@ -112,13 +47,11 @@ export function LanguageSelector({
 				dir="ltr"
 			>
 				<SelectGroup>
-					{languageOptions
-						.filter((option) => languages.includes(option.value as Language))
-						.map((option) => (
-							<SelectItem key={option.value} value={option.value}>
-								{option.label}
-							</SelectItem>
-						))}
+					{languageOptions.map((option) => (
+						<SelectItem key={option.value} value={option.value}>
+							{option.label}
+						</SelectItem>
+					))}
 				</SelectGroup>
 			</SelectContent>
 		</Select>

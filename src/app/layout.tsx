@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 
 import { Navbar } from "@/components/layout/navbar";
-import { DirectionProvider } from "@/components/ui/direction";
 
 import { instrumentSerifHeading, publicSans } from "@/assets/fonts";
 
 import { CartProvider } from "@/features/cart/context/cart-context";
+import { defaultLocale, getTextDirection } from "@/lib/i18n/config";
 import { cn } from "@/lib/utils";
 import { getCart } from "@/lib/wix";
 
@@ -16,12 +16,12 @@ export const metadata: Metadata = {
 		"Discover a curated collection of Islamic literature, academic texts, and classic books at Rewaya Book World.",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const cart = getCart();
+	const cartPromise = getCart();
 
 	return (
 		<html
@@ -30,15 +30,14 @@ export default async function RootLayout({
 				publicSans.variable,
 				instrumentSerifHeading.variable
 			)}
-			lang="en"
+			dir={getTextDirection(defaultLocale)}
+			lang={defaultLocale}
 		>
 			<body className="flex min-h-full flex-col">
-				<DirectionProvider direction="ltr">
-					<CartProvider cartPromise={cart}>
-						<Navbar />
-						{children}
-					</CartProvider>
-				</DirectionProvider>
+				<CartProvider cartPromise={cartPromise}>
+					<Navbar />
+					{children}
+				</CartProvider>
 			</body>
 		</html>
 	);

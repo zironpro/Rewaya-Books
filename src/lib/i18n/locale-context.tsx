@@ -5,6 +5,7 @@ import {
 	type ReactNode,
 	useCallback,
 	useContext,
+	useEffect,
 	useMemo,
 	useState,
 } from "react";
@@ -65,6 +66,10 @@ export function LocaleProvider({
 		}),
 		[locale, setLocale]
 	);
+
+	useEffect(() => {
+		syncDocumentLocale(locale);
+	}, [locale]);
 
 	return (
 		<LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>
