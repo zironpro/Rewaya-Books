@@ -104,10 +104,8 @@ const reshapeCart = (cart: currentCart.Cart): Cart => {
 	};
 };
 
-const reshapeCollection = (
-	collection: collections.Collection
-): Collection => ({
-	path: `/search/${collection.slug ?? ""}`,
+const reshapeCollection = (collection: collections.Collection): Collection => ({
+	path: `/shop/${collection.slug ?? ""}`,
 	handle: collection.slug ?? "",
 	title: collection.name ?? "",
 	description: collection.description ?? "",
@@ -357,7 +355,7 @@ export async function getCollections(): Promise<Collection[]> {
 				title: "All",
 				description: "All products",
 			},
-			path: "/search",
+			path: "/shop" as const,
 			updatedAt: new Date().toISOString(),
 		},
 		// Filter out the `hidden` collections.

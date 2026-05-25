@@ -15,7 +15,7 @@ export default function SearchForm() {
 
 	return (
 		<Form
-			action="/search"
+			action="/shop"
 			className="relative w-full max-w-[550px] lg:w-80 xl:w-full"
 		>
 			<InputGroup className="bg-muted">

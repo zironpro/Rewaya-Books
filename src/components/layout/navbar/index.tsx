@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { Logo } from "@/assets/logo";
 
+import { CategoriesNavigation } from "./categories-navigations";
 import { NavActions } from "./nav-actions";
 import SearchForm, { SearchSkeleton } from "./search";
 
@@ -31,6 +32,8 @@ export async function Navbar({
 					<NavActions />
 				</div>
 			</div>
+
+			{showCategories && <CategoriesNavigation />}
 		</header>
 	);
 }
