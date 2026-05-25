@@ -137,7 +137,7 @@ function SubComponent() {
 ## Security Guidelines
 
 ### Authentication
-- Use better-auth for authentication
+- Use wix members for authentication
 - Implement proper session management
 - Validate all user inputs
 - Use environment variables for sensitive data
