@@ -136,31 +136,34 @@
 }
 
 :root {
-	--card: var(--color-white);
-	--card-foreground: var(--color-neutral-800);
-	--popover: var(--color-white);
-	--popover-foreground: var(--color-neutral-800);
+	--background: oklch(0.988 0.008 67.83);
+	--foreground: oklch(0.145 0 0);
+
 	--primary: oklch(0.4674 0.1893 358.62);
-	--primary-foreground: var(--color-neutral-50);
+	--primary-foreground: var(--color-mauve-50);
 	--secondary: --alpha(var(--color-black) / 4%);
-	--secondary-foreground: var(--color-neutral-800);
-	--muted: --alpha(var(--color-black) / 4%);
+	--secondary-foreground: var(--color-mauve-800);
+
+	--muted: --alpha(var(--color-mauve-800) / 6%);
 	--muted-foreground: color-mix(
 		in srgb,
-		var(--color-neutral-500) 90%,
+		var(--color-mauve-500) 90%,
 		var(--color-black)
 	);
+
+	--card: var(--color-white);
+	--card-foreground: var(--color-mauve-800);
+
+	--popover: var(--color-white);
+	--popover-foreground: var(--color-mauve-800);
+
 	--accent: --alpha(var(--color-black) / 4%);
-	--accent-foreground: var(--color-neutral-800);
+	--accent-foreground: var(--color-mauve-800);
 	--destructive: var(--color-red-500);
 	--border: --alpha(var(--color-black) / 8%);
 	--input: --alpha(var(--color-black) / 10%);
-	--ring: var(--color-neutral-400);
-	--chart-1: var(--color-orange-600);
-	--chart-2: var(--color-teal-600);
-	--chart-3: var(--color-cyan-900);
-	--chart-4: var(--color-amber-400);
-	--chart-5: var(--color-amber-500);
+	--ring: var(--color-mauve-400);
+
 	--radius: 0.625rem;
 
 	--destructive-foreground: var(--color-red-700);
@@ -170,8 +173,6 @@
 	--success-foreground: var(--color-emerald-700);
 	--warning: var(--color-amber-500);
 	--warning-foreground: var(--color-amber-700);
-	--background: var(--color-white);
-	--foreground: var(--color-neutral-800);
 }
 
 @layer base {

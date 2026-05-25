@@ -1,7 +1,3 @@
 export default function Home() {
-	return (
-		<main className="flex w-full max-w-3xl flex-1 flex-col items-center justify-between px-16 py-32 sm:items-start">
-			Hello
-		</main>
-	);
+	return <main className="container py-4">Hello</main>;
 }

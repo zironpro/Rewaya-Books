@@ -14,6 +14,7 @@
     "@phosphor-icons/react": "^2.1.10",
     "@wix/data": "^1.0.463",
     "@wix/ecom": "^1.0.2074",
+    "@wix/members": "^1.0.452",
     "@wix/redirects": "^1.0.113",
     "@wix/sdk": "^1.21.12",
     "@wix/stores": "^1.0.786",
