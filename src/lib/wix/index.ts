@@ -460,6 +460,18 @@ export const getWixClient = async () => {
 	return wixClient;
 };
 
+export {
+	clearSessionTokens,
+	getAuthWixClient,
+	getCurrentMember,
+	getMemberDisplayName,
+	getSessionTokens,
+	isMemberLoggedIn,
+	isMemberSession,
+	parseSessionTokens,
+	saveSessionTokens,
+} from "./members";
+
 export async function createCheckoutUrl(postFlowUrl: string) {
 	const {
 		currentCart: { createCheckoutFromCurrentCart },

@@ -6,6 +6,7 @@ import { Logo } from "@/assets/logo";
 
 import { CategoriesNavigation } from "./categories-navigations";
 import { NavActions } from "./nav-actions";
+import { NavbarAuthActions } from "./navbar-auth-actions";
 import SearchForm, { SearchSkeleton } from "./search";
 
 interface NavbarProps {
@@ -29,13 +30,19 @@ export async function Navbar({
 
 					<NavbarSearch showSearch={showSearch} />
 
-					<NavActions />
+					<Suspense fallback={<NavActionsFallback />}>
+						<NavbarAuthActions />
+					</Suspense>
 				</div>
 			</div>
 
 			{showCategories && <CategoriesNavigation />}
 		</header>
 	);
+}
+
+function NavActionsFallback() {
+	return <NavActions displayName={null} isLoggedIn={false} />;
 }
 
 function NavbarSearch({ showSearch = true }: { showSearch?: boolean }) {

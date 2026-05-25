@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { createClient, OAuthStrategy, Tokens } from "@wix/sdk";
+import { createClient, OAuthStrategy, type Tokens } from "@wix/sdk";
 
 import { WIX_SESSION_COOKIE } from "@/lib/constants";
+import { isMemberSession, parseSessionTokens } from "@/lib/wix/members";
 
 import { env } from "./lib/env/server";
 
@@ -12,32 +13,43 @@ const wixClient = createClient({
 	}),
 });
 
+const SESSION_MAX_AGE = 60 * 60 * 24 * 12;
+
 export async function proxy(request: NextRequest) {
-	const cookies = request.cookies;
-	const sessionCookie = cookies.get(WIX_SESSION_COOKIE);
+	const sessionCookie = request.cookies.get(WIX_SESSION_COOKIE);
+	const parsedTokens = parseSessionTokens(sessionCookie?.value);
+	const wasMember = isMemberSession(parsedTokens);
 
-	let sessionTokens = sessionCookie
-		? (JSON.parse(sessionCookie.value) as Tokens)
-		: await wixClient.auth.generateVisitorTokens();
+	let sessionTokens: Tokens =
+		parsedTokens ?? (await wixClient.auth.generateVisitorTokens());
 
-	if (sessionTokens.accessToken.expiresAt < Math.floor(Date.now() / 1000)) {
+	const isExpired =
+		sessionTokens.accessToken.expiresAt < Math.floor(Date.now() / 1000);
+
+	if (isExpired) {
 		try {
 			sessionTokens = await wixClient.auth.renewToken(
 				sessionTokens.refreshToken
 			);
 		} catch (_e) {
-			// if we failed to renew the token with the existing refresh token, it's likely expired
-			// so we generate a new set of tokens for a visitor (this will log out members if they were logged in before)
+			if (wasMember) {
+				const res = NextResponse.next({ request });
+				res.cookies.delete(WIX_SESSION_COOKIE);
+				return res;
+			}
 			sessionTokens = await wixClient.auth.generateVisitorTokens();
 		}
 	}
 
 	request.cookies.set(WIX_SESSION_COOKIE, JSON.stringify(sessionTokens));
-	const res = NextResponse.next({
-		request,
-	});
+	request.headers.set("x-pathname", request.nextUrl.pathname);
+	const res = NextResponse.next({ request });
 	res.cookies.set(WIX_SESSION_COOKIE, JSON.stringify(sessionTokens), {
-		maxAge: 60 * 60 * 24 * 12,
+		maxAge: SESSION_MAX_AGE,
+		httpOnly: true,
+		secure: process.env.NODE_ENV === "production",
+		sameSite: "lax",
+		path: "/",
 	});
 
 	return res;

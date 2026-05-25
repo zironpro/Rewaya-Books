@@ -10,7 +10,7 @@ export function cn(...inputs: ClassValue[]): string {
 }
 
 export const baseUrl = process.env.SITE_URL
-	? `https://${env.SITE_URL}`
+	? `${env.SITE_URL}`
 	: "http://localhost:3000";
 
 export const createUrl = (

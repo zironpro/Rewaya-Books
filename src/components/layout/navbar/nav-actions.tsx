@@ -4,7 +4,6 @@ import { ComponentType, Suspense } from "react";
 
 import Link from "next/link";
 
-import { UserIcon } from "@phosphor-icons/react";
 import { HeartIcon, ShoppingBagIcon } from "@phosphor-icons/react/dist/ssr";
 
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -18,6 +17,8 @@ import {
 } from "@/components/ui/tooltip";
 
 import CartModal from "@/features/cart/components/cart-modal";
+
+import { NavbarUser } from "./navbar-user";
 
 const tooltipHandle = TooltipCreateHandle<ComponentType>();
 
@@ -41,29 +42,21 @@ function CartTooltipTrigger() {
 const FavoritesContent = () => {
 	return <span>Favorite book self</span>;
 };
-const ProfileContent = () => {
-	return <span>Profile</span>;
-};
+interface NavActionsProps {
+	isLoggedIn: boolean;
+	displayName?: string | null;
+}
 
-export const NavActions = () => {
+export const NavActions = ({ isLoggedIn, displayName }: NavActionsProps) => {
 	return (
 		<TooltipProvider delay={50}>
 			<div className="flex justify-end gap-1 md:w-1/3">
 				{/* <LanguageSelector onValueChange={setLocale} value={locale} /> */}
-				<TooltipTrigger
-					className="after:absolute after:inset-s-full after:h-full after:w-1"
+				<NavbarUser
+					displayName={displayName}
 					handle={tooltipHandle}
-					payload={ProfileContent}
-					render={
-						<Link
-							className={buttonVariants({ variant: "ghost", size: "icon-lg" })}
-							href="/profile"
-						/>
-					}
-				>
-					<UserIcon aria-hidden="true" className="size-4" />
-					<span className="sr-only">Profile</span>
-				</TooltipTrigger>
+					isLoggedIn={isLoggedIn}
+				/>
 				<TooltipTrigger
 					className="after:absolute after:inset-s-full after:h-full after:w-1"
 					handle={tooltipHandle}

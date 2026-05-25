@@ -199,15 +199,34 @@
 
 @layer utilities {
 	.container {
+		/* base — default (< sm, < 640px) */
+		width: 100%;
+		max-width: 100%;
 		margin-inline: auto;
 		padding-inline: 1rem;
 
+		/* sm — ≥640px (40rem) */
 		@media (width >= 40rem) {
+			max-width: 50rem;
+			padding-inline: 1.25rem;
+		}
+
+		/* lg — ≥1024px (64rem) */
+		@media (width >= 64rem) {
+			max-width: 70rem;
 			padding-inline: 1.5rem;
 		}
 
-		@media (width >= 64rem) {
-			padding-inline: 2rem;
+		/* xl — ≥1280px (80rem), 1440px max — e-commerce desktop */
+		@media (width >= 80rem) {
+			max-width: 90rem;
+			padding-inline: 1.25rem;
+		}
+
+		/* 2xl — ≥1536px (96rem), 1600px max — wide / product grids */
+		@media (width >= 96rem) {
+			max-width: 100rem;
+			padding-inline: 1rem;
 		}
 	}
 }

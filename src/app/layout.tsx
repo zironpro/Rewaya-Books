@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
+
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
+import { BreakpointIndicator } from "@/components/layout/breakpoint-indicator";
 import { Navbar } from "@/components/layout/navbar";
 
 import { instrumentSerifHeading, publicSans } from "@/assets/fonts";
@@ -41,6 +43,8 @@ export default function RootLayout({
 						{children}
 					</CartProvider>
 				</NuqsAdapter>
+
+				<BreakpointIndicator />
 			</body>
 		</html>
 	);
