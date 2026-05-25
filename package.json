@@ -10,18 +10,31 @@
     "format": "biome format --write"
   },
   "dependencies": {
+    "@base-ui/react": "^1.5.0",
+    "@phosphor-icons/react": "^2.1.10",
+    "@wix/data": "^1.0.463",
+    "@wix/ecom": "^1.0.2074",
+    "@wix/redirects": "^1.0.113",
+    "@wix/sdk": "^1.21.12",
+    "@wix/stores": "^1.0.786",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "next": "16.2.6",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-day-picker": "^10.0.1",
+    "react-dom": "19.2.4",
+    "shadcn": "^4.8.0",
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.0",
+    "@biomejs/biome": "2.4.15",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
     "tailwindcss": "^4",
+    "tw-animate-css": "^1.4.0",
     "typescript": "^5"
   }
 }
