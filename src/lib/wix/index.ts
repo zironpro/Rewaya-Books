@@ -8,6 +8,8 @@ import { collections, products } from "@wix/stores";
 import { SortKey, WIX_SESSION_COOKIE } from "@/lib/constants";
 import { Cart, Collection, Product, ProductVariant } from "@/lib/wix/types";
 
+import { env } from "../env/server";
+
 const cartesian = <T>(data: T[][]) =>
 	data.reduce((a, b) => a.flatMap((d) => b.map((e) => [...d, e])), [
 		[],
@@ -451,7 +453,7 @@ export const getWixClient = async () => {
 	} catch {}
 	const wixClient = createClient({
 		auth: OAuthStrategy({
-			clientId: process.env.WIX_CLIENT_ID!,
+			clientId: env.WIX_CLIENT_ID,
 			tokens: sessionTokens,
 		}),
 	});

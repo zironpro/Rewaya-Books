@@ -4,9 +4,11 @@ import { createClient, OAuthStrategy, Tokens } from "@wix/sdk";
 
 import { WIX_SESSION_COOKIE } from "@/lib/constants";
 
+import { env } from "./lib/env/server";
+
 const wixClient = createClient({
 	auth: OAuthStrategy({
-		clientId: process.env.WIX_CLIENT_ID!,
+		clientId: env.WIX_CLIENT_ID,
 	}),
 });
 
@@ -23,7 +25,7 @@ export async function proxy(request: NextRequest) {
 			sessionTokens = await wixClient.auth.renewToken(
 				sessionTokens.refreshToken
 			);
-		} catch (e) {
+		} catch (_e) {
 			// if we failed to renew the token with the existing refresh token, it's likely expired
 			// so we generate a new set of tokens for a visitor (this will log out members if they were logged in before)
 			sessionTokens = await wixClient.auth.generateVisitorTokens();

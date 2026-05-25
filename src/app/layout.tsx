@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { Navbar } from "@/components/layout/navbar";
 
@@ -34,10 +35,12 @@ export default function RootLayout({
 			lang={defaultLocale}
 		>
 			<body className="flex min-h-full flex-col">
-				<CartProvider cartPromise={cartPromise}>
-					<Navbar />
-					{children}
-				</CartProvider>
+				<NuqsAdapter>
+					<CartProvider cartPromise={cartPromise}>
+						<Navbar />
+						{children}
+					</CartProvider>
+				</NuqsAdapter>
 			</body>
 		</html>
 	);
