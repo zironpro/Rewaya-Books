@@ -51,7 +51,7 @@ export const NavActions = () => {
 	return (
 		<TooltipProvider delay={50}>
 			<div className="flex justify-end md:w-1/3">
-				<LanguageSelector />
+				<LanguageSelector onValueChange={() => {}} value="en" />
 				<TooltipTrigger
 					className="after:absolute after:left-full after:h-full after:w-1"
 					handle={tooltipHandle}

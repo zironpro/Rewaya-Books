@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import { NumberField as NumberFieldPrimitive } from "@base-ui/react/number-field";
-import { MinusIcon, PlusIcon } from "lucide-react";
+import { MinusIcon, PlusIcon } from "@phosphor-icons/react/dist/ssr";
 
 import { Label } from "@/components/ui/label";
 

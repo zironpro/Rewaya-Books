@@ -1,47 +1,126 @@
 "use client";
 
-import { TranslateIcon } from "@phosphor-icons/react";
+import * as React from "react";
 
-import { Button } from "@/components/ui/button";
 import {
-	Menu,
-	MenuPopup,
-	MenuRadioGroup,
-	MenuRadioItem,
-	MenuTrigger,
-} from "@/components/ui/menu";
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 
-import { localeConfig, locales } from "@/lib/i18n/config";
-import { useLocale } from "@/lib/i18n/locale-context";
+import { cn } from "@/lib/utils";
 
-export function LanguageSelector() {
-	const { locale, setLocale } = useLocale();
+export type Language = "en" | "ar" | "he";
+
+export type Direction = "ltr" | "rtl";
+
+export type Translations<
+	T extends Record<string, string> = Record<string, string>,
+> = Record<
+	Language,
+	{
+		dir: Direction;
+		locale?: string;
+		values: T;
+	}
+>;
+
+export const languageOptions = [
+	{ value: "en", label: "English" },
+	{ value: "ar", label: "Arabic (العربية)" },
+	{ value: "he", label: "Hebrew (עברית)" },
+] as const;
+
+type LanguageContextType = {
+	language: Language;
+	setLanguage: (language: Language) => void;
+};
+
+const LanguageContext = React.createContext<LanguageContextType | undefined>(
+	undefined
+);
+
+export function LanguageProvider({
+	children,
+	defaultLanguage = "ar",
+}: {
+	children: React.ReactNode;
+	defaultLanguage?: Language;
+}) {
+	const [language, setLanguage] = React.useState<Language>(defaultLanguage);
 
 	return (
-		<Menu>
-			<MenuTrigger
-				aria-label="Select language"
-				render={<Button size="icon-lg" variant="ghost" />}
+		<LanguageContext.Provider value={{ language, setLanguage }}>
+			{children}
+		</LanguageContext.Provider>
+	);
+}
+
+export function useLanguageContext() {
+	const context = React.useContext(LanguageContext);
+	return context;
+}
+
+export function useTranslation<T extends Record<string, string>>(
+	translations: Translations<T>,
+	defaultLanguage: Language = "ar"
+) {
+	const context = useLanguageContext();
+	const [localLanguage, setLocalLanguage] =
+		React.useState<Language>(defaultLanguage);
+
+	const language = context?.language ?? localLanguage;
+	const setLanguage = context?.setLanguage ?? setLocalLanguage;
+
+	const { dir, locale, values: t } = translations[language];
+	return { language, setLanguage, dir, locale, t };
+}
+
+export interface LanguageSelectorProps {
+	value: Language;
+	onValueChange: (value: Language) => void;
+}
+
+export function LanguageSelector({
+	value,
+	onValueChange,
+	className,
+	languages = ["en", "ar", "he"],
+}: LanguageSelectorProps & {
+	className?: string;
+	languages?: Language[];
+}) {
+	return (
+		<Select
+			items={languageOptions}
+			onValueChange={(value) => onValueChange(value as Language)}
+			value={value}
+		>
+			<SelectTrigger
+				className={cn("w-36", className)}
+				data-name="language-selector"
+				dir="ltr"
+				size="sm"
 			>
-				<TranslateIcon aria-hidden="true" className="size-4" />
-				<span className="sr-only">Language</span>
-			</MenuTrigger>
-			<MenuPopup align="end" className="min-w-36">
-				<MenuRadioGroup
-					onValueChange={(value) => {
-						if (value === "en" || value === "ar") {
-							setLocale(value);
-						}
-					}}
-					value={locale}
-				>
-					{locales.map((code) => (
-						<MenuRadioItem key={code} value={code}>
-							{localeConfig[code].nativeLabel}
-						</MenuRadioItem>
-					))}
-				</MenuRadioGroup>
-			</MenuPopup>
-		</Menu>
+				<SelectValue />
+			</SelectTrigger>
+			<SelectContent
+				className="data-closed:animate-none data-open:animate-none"
+				dir="ltr"
+			>
+				<SelectGroup>
+					{languageOptions
+						.filter((option) => languages.includes(option.value as Language))
+						.map((option) => (
+							<SelectItem key={option.value} value={option.value}>
+								{option.label}
+							</SelectItem>
+						))}
+				</SelectGroup>
+			</SelectContent>
+		</Select>
 	);
 }

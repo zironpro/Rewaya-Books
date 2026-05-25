@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 import "@/styles/globals.css";
 
 import { Navbar } from "@/components/layout/navbar";
-import { LocaleDirectionProvider } from "@/components/providers/locale-direction-provider";
+import { DirectionProvider } from "@/components/ui/direction";
 
 import { instrumentSerifHeading, publicSans } from "@/assets/fonts";
 
 import { CartProvider } from "@/features/cart/context/cart-context";
-import {
-	getLocaleFromCookie,
-	getTextDirection,
-	localeCookieName,
-} from "@/lib/i18n/config";
 import { cn } from "@/lib/utils";
 import { getCart } from "@/lib/wix";
 
@@ -28,9 +22,6 @@ export default async function RootLayout({
 	children: React.ReactNode;
 }>) {
 	const cart = getCart();
-	const cookieStore = await cookies();
-	const locale = getLocaleFromCookie(cookieStore.get(localeCookieName)?.value);
-	const direction = getTextDirection(locale);
 
 	return (
 		<html
@@ -39,16 +30,15 @@ export default async function RootLayout({
 				publicSans.variable,
 				instrumentSerifHeading.variable
 			)}
-			dir={direction}
-			lang={locale}
+			lang="en"
 		>
 			<body className="flex min-h-full flex-col">
-				<LocaleDirectionProvider locale={locale}>
+				<DirectionProvider direction="ltr">
 					<CartProvider cartPromise={cart}>
 						<Navbar />
 						{children}
 					</CartProvider>
-				</LocaleDirectionProvider>
+				</DirectionProvider>
 			</body>
 		</html>
 	);

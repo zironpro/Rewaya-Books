@@ -3,7 +3,7 @@
 import type * as React from "react";
 
 import { Menu as MenuPrimitive } from "@base-ui/react/menu";
-import { ChevronRightIcon } from "lucide-react";
+import { CaretRightIcon } from "@phosphor-icons/react/dist/ssr";
 
 import { cn } from "@/lib/utils";
 
@@ -277,7 +277,7 @@ export function MenuSubTrigger({
 			{...props}
 		>
 			{children}
-			<ChevronRightIcon className="ms-auto -me-0.5 opacity-80" />
+			<CaretRightIcon className="ms-auto -me-0.5 opacity-80" />
 		</MenuPrimitive.SubmenuTrigger>
 	);
 }
