@@ -8,10 +8,10 @@ import { Navbar } from "@/components/layout/navbar";
 
 import { instrumentSerifHeading, publicSans } from "@/assets/fonts";
 
+import { getCart } from "@/features/cart/actions";
 import { CartProvider } from "@/features/cart/context/cart-context";
 import { defaultLocale, getTextDirection } from "@/lib/i18n/config";
 import { cn } from "@/lib/utils";
-import { getCart } from "@/lib/wix";
 
 export const metadata: Metadata = {
 	title: "Al Rewaya Book World | Your Premier Islamic Bookstore",
