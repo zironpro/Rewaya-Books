@@ -4,9 +4,8 @@ import "@/styles/globals.css";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { BreakpointIndicator } from "@/components/layout/breakpoint-indicator";
-import { Navbar } from "@/components/layout/navbar";
 
-import { instrumentSerifHeading, publicSans } from "@/assets/fonts";
+import { google, instrumentSerifHeading } from "@/assets/fonts";
 
 import { getCart } from "@/features/cart/actions";
 import { CartProvider } from "@/features/cart/context/cart-context";
@@ -30,7 +29,7 @@ export default function RootLayout({
 		<html
 			className={cn(
 				"h-full font-sans antialiased",
-				publicSans.variable,
+				google.variable,
 				instrumentSerifHeading.variable
 			)}
 			dir={getTextDirection(defaultLocale)}
@@ -38,10 +37,7 @@ export default function RootLayout({
 		>
 			<body className="flex min-h-full flex-col">
 				<NuqsAdapter>
-					<CartProvider cartPromise={cartPromise}>
-						<Navbar />
-						{children}
-					</CartProvider>
+					<CartProvider cartPromise={cartPromise}>{children}</CartProvider>
 				</NuqsAdapter>
 
 				<BreakpointIndicator />

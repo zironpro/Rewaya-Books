@@ -8,7 +8,7 @@ import { collections, products } from "@wix/stores";
 import { SortKey, WIX_SESSION_COOKIE } from "@/lib/constants";
 import { Collection, Product } from "@/lib/wix/types";
 
-import { env } from "../env/server";
+import { env } from "../env/client";
 import {
 	getApplicationErrorCode,
 	isWixSdkError,
@@ -85,7 +85,7 @@ export async function getCollections(): Promise<Collection[]> {
 	const wixCollections = [
 		{
 			handle: "",
-			title: "All",
+			title: "Shop All",
 			description: "All products",
 			seo: {
 				title: "All",
@@ -187,7 +187,7 @@ export const getWixClient = async () => {
 	} catch {}
 	const wixClient = createClient({
 		auth: OAuthStrategy({
-			clientId: env.WIX_CLIENT_ID,
+			clientId: env.NEXT_PUBLIC_WIX_CLIENT_ID,
 			tokens: sessionTokens,
 		}),
 	});

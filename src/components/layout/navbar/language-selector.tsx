@@ -9,7 +9,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 
-import { type Locale, localeConfig, locales } from "@/lib/i18n/config";
+import { localeConfig, locales } from "@/lib/i18n/config";
 import { cn } from "@/lib/utils";
 
 export const languageOptions = locales.map((locale) => ({
@@ -18,24 +18,14 @@ export const languageOptions = locales.map((locale) => ({
 }));
 
 export interface LanguageSelectorProps {
-	value: Locale;
-	onValueChange: (value: Locale) => void;
 	className?: string;
 }
 
-export function LanguageSelector({
-	value,
-	onValueChange,
-	className,
-}: LanguageSelectorProps) {
+export function LanguageSelector({ className }: LanguageSelectorProps) {
 	return (
-		<Select
-			items={languageOptions}
-			onValueChange={(nextValue) => onValueChange(nextValue as Locale)}
-			value={value}
-		>
+		<Select items={languageOptions}>
 			<SelectTrigger
-				className={cn("w-40", className)}
+				className={cn("w-28", className)}
 				data-name="language-selector"
 				dir="ltr"
 				size="sm"

@@ -5,7 +5,7 @@ import { BundlesPageView } from "@/features/bundles/bundles-page-view";
 export default function BundlesPage() {
 	return (
 		<Suspense>
-			<BundlesPageView />;
+			<BundlesPageView />
 		</Suspense>
 	);
 }

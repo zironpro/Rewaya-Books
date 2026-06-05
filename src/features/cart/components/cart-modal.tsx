@@ -18,11 +18,7 @@ import {
 
 import { useCart } from "../context/cart-context";
 
-export default function CartModal({
-	trigger,
-}: {
-	trigger: React.ReactNode;
-}) {
+export default function CartModal({ trigger }: { trigger: React.ReactNode }) {
 	const { cart, updateCartItem } = useCart();
 	return (
 		<Drawer position="right">

@@ -22,7 +22,7 @@ export default async function SearchPage(props: {
 
 	console.log(products);
 	return (
-		<>
+		<section className="container py-6">
 			{searchValue ? (
 				<p className="mb-4">
 					{products.length === 0
@@ -36,6 +36,6 @@ export default async function SearchPage(props: {
 					<ProductGridItems products={products} />
 				</Grid>
 			) : null}
-		</>
+		</section>
 	);
 }

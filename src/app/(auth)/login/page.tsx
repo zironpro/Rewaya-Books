@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { AuthTabs } from "@/features/account";
+import { AuthTabs, LoginButton } from "@/features/account";
 import { AUTH_RETURN_TO_PARAM } from "@/lib/constants";
 import { env } from "@/lib/env/server";
 import { isMemberLoggedIn } from "@/lib/wix/members";
@@ -55,8 +55,9 @@ async function LoginPageContent({ searchParams }: LoginPageProps) {
 	}
 
 	return (
-		<main className="container flex min-h-[calc(100vh-3.5rem)] items-center justify-center py-12">
-			<div className="w-full max-w-md rounded-xl border bg-card p-6 shadow-xs md:p-8">
+		<main className="container flex min-h-svh items-center justify-center py-12">
+			<div className="w-full max-w-md rounded-md border bg-card p-6 shadow-xs md:p-8">
+				<LoginButton />
 				<AuthTabs
 					clientId={env.WIX_CLIENT_ID}
 					returnTo={returnTo}

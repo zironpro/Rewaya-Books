@@ -1,4 +1,4 @@
-import { Instrument_Serif, Public_Sans } from "next/font/google";
+import { Google_Sans, Instrument_Serif } from "next/font/google";
 
 export const instrumentSerifHeading = Instrument_Serif({
 	subsets: ["latin"],
@@ -6,7 +6,15 @@ export const instrumentSerifHeading = Instrument_Serif({
 	variable: "--font-display",
 });
 
-export const publicSans = Public_Sans({
+export const google = Google_Sans({
 	subsets: ["latin"],
 	variable: "--font-sans",
+	fallback: [
+		"Inter",
+		"Segoe UI",
+		"Roboto",
+		"Helvetica Neue",
+		"Arial",
+		"sans-serif",
+	],
 });

@@ -1,0 +1,28 @@
+@theme inline {
+	--shadow-xs:
+		0 0 0 0.5px --alpha(var(--color-mauve-950) / 6%),
+		0 2px 2px -1px --alpha(var(--color-mauve-950) / 4%),
+		0 4px 4px -2px --alpha(var(--color-mauve-950) / 2%),
+		0 8px 8px -4px --alpha(var(--color-mauve-950) / 1%);
+
+	--shadow-sm:
+		0 0 0 0.5px --alpha(var(--color-mauve-950) / 9%),
+		0 3px 3px -1.5px --alpha(var(--color-mauve-950) / 9%),
+		0 6px 6px -3px --alpha(var(--color-mauve-950) / 6%),
+		0 12px 12px -6px --alpha(var(--color-mauve-950) / 4%);
+
+	--shadow-md:
+		0 0 0 0.5px --alpha(var(--color-mauve-950) / 9%),
+		0 3px 3px -1.5px --alpha(var(--color-mauve-950) / 9%),
+		0 6px 6px -3px --alpha(var(--color-mauve-950) / 6%),
+		0 12px 12px -6px --alpha(var(--color-mauve-950) / 6%),
+		0 24px 24px -12px --alpha(var(--color-mauve-950) / 4%);
+
+	--shadow-lg:
+		0 48px 48px -24px --alpha(var(--color-mauve-950) / 9%),
+		0 24px 24px -12px --alpha(var(--color-mauve-950) / 10%),
+		0 12px 12px -6px --alpha(var(--color-mauve-950) / 9%),
+		0 6px 6px -3px --alpha(var(--color-mauve-950) / 9%),
+		0 3px 3px -1.5px --alpha(var(--color-mauve-950) / 6%),
+		0 0 0 1px --alpha(var(--color-mauve-950) / 9%);
+}

@@ -2,6 +2,8 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@import "./animations.css";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -55,6 +57,34 @@
 	--color-info-foreground: var(--info-foreground);
 	--color-info: var(--info);
 	--color-destructive-foreground: var(--destructive-foreground);
+
+	--shadow-xs:
+		0 0 0 0.5px --alpha(var(--color-mauve-950) / 6%),
+		0 2px 2px -1px --alpha(var(--color-mauve-950) / 4%),
+		0 4px 4px -2px --alpha(var(--color-mauve-950) / 3%),
+		0 8px 8px -4px --alpha(var(--color-mauve-950) / 2%);
+
+	--shadow-sm:
+		0 0 0 0.5px --alpha(var(--color-mauve-950) / 9%),
+		0 3px 3px -1.5px --alpha(var(--color-mauve-950) / 9%),
+		0 6px 6px -3px --alpha(var(--color-mauve-950) / 6%),
+		0 12px 12px -6px --alpha(var(--color-mauve-950) / 4%);
+
+	--shadow-md:
+		0 0 0 0.5px --alpha(var(--color-mauve-950) / 9%),
+		0 3px 3px -1.5px --alpha(var(--color-mauve-950) / 9%),
+		0 6px 6px -3px --alpha(var(--color-mauve-950) / 6%),
+		0 12px 12px -6px --alpha(var(--color-mauve-950) / 6%),
+		0 24px 24px -12px --alpha(var(--color-mauve-950) / 4%);
+
+	--shadow-lg:
+		0 48px 48px -24px --alpha(var(--color-mauve-950) / 9%),
+		0 24px 24px -12px --alpha(var(--color-mauve-950) / 10%),
+		0 12px 12px -6px --alpha(var(--color-mauve-950) / 9%),
+		0 6px 6px -3px --alpha(var(--color-mauve-950) / 9%),
+		0 3px 3px -1.5px --alpha(var(--color-mauve-950) / 6%),
+		0 0 0 1px --alpha(var(--color-mauve-950) / 9%);
+
 	@keyframes skeleton {
 		to {
 			background-position: -200% 0;
@@ -155,7 +185,7 @@
 	--card-foreground: var(--color-mauve-800);
 
 	--popover: var(--color-white);
-	--popover-foreground: var(--color-mauve-800);
+	--popover-foreground: var(--color-mauve-700);
 
 	--accent: --alpha(var(--color-black) / 4%);
 	--accent-foreground: var(--color-mauve-800);
@@ -207,26 +237,26 @@
 
 		/* sm — ≥640px (40rem) */
 		@media (width >= 40rem) {
-			max-width: 50rem;
+			/* max-width: 50rem; */
 			padding-inline: 1.25rem;
 		}
 
 		/* lg — ≥1024px (64rem) */
 		@media (width >= 64rem) {
-			max-width: 70rem;
-			padding-inline: 1.5rem;
+			/* max-width: 70rem; */
+			padding-inline: 2rem;
 		}
 
 		/* xl — ≥1280px (80rem), 1440px max — e-commerce desktop */
 		@media (width >= 80rem) {
-			max-width: 90rem;
-			padding-inline: 1.25rem;
+			/* max-width: 90rem; */
+			padding-inline: 3rem;
 		}
 
 		/* 2xl — ≥1536px (96rem), 1600px max — wide / product grids */
 		@media (width >= 96rem) {
-			max-width: 100rem;
-			padding-inline: 1rem;
+			/* max-width: 100rem; */
+			padding-inline: 4rem;
 		}
 	}
 }

@@ -47,7 +47,7 @@ export function AuthTabs({ clientId, siteUrl, returnTo }: AuthTabsProps) {
 	return (
 		<div className="space-y-6">
 			<div className="space-y-2 text-center">
-				<h1 className="font-heading text-3xl">Welcome back</h1>
+				<h1 className="font-bold font-heading text-3xl">Welcome back</h1>
 				<p className="text-muted-foreground text-sm">
 					Sign in or create an account to save favorites and manage your
 					profile.

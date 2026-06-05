@@ -20,6 +20,25 @@ export const isWixSdkError = (error: unknown): error is WixSdkError =>
 export const getApplicationErrorCode = (error: unknown) =>
 	isWixSdkError(error) ? error.details?.applicationError?.code : undefined;
 
+export type WixResolvedImage = {
+	url: string;
+	width: number;
+	height: number;
+	altText?: string;
+};
+
+/** Converts `wix:image://…` (or static.wixstatic.com URLs) to a Next.js–compatible image. */
+export const getWixImage = (
+	source: string | null | undefined
+): WixResolvedImage | undefined => {
+	if (!source) {
+		return undefined;
+	}
+
+	const { url, width, height, altText } = media.getImageUrl(source);
+	return { url, width, height, altText };
+};
+
 const getOptionChoiceLabel = (
 	optionType: products.ProductOption["optionType"],
 	choice: products.Choice
@@ -59,7 +78,7 @@ export const reshapeCart = (cart: currentCart.Cart): Cart => {
 			},
 		},
 		lines: cart.lineItems!.map((item) => {
-			const featuredImage = media.getImageUrl(item.image!);
+			const featuredImage = getWixImage(item.image!)!;
 			return {
 				id: item._id!,
 				quantity: item.quantity!,
@@ -81,11 +100,10 @@ export const reshapeCart = (cart: currentCart.Cart): Cart => {
 					product: {
 						handle: item.url?.split("/").pop() ?? "",
 						featuredImage: {
-							altText:
-								"altText" in featuredImage ? featuredImage.altText : "alt text",
-							url: media.getImageUrl(item.image!).url,
-							width: media.getImageUrl(item.image!).width,
-							height: media.getImageUrl(item.image!).height,
+							altText: featuredImage.altText ?? "alt text",
+							url: featuredImage.url,
+							width: featuredImage.width,
+							height: featuredImage.height,
 						},
 						title: item.productName?.original!,
 						// biome-ignore lint/suspicious/noExplicitAny: return type is Product

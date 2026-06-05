@@ -5,11 +5,11 @@ import { createClient, OAuthStrategy, type Tokens } from "@wix/sdk";
 import { WIX_SESSION_COOKIE } from "@/lib/constants";
 import { isMemberSession, parseSessionTokens } from "@/lib/wix/members";
 
-import { env } from "./lib/env/server";
+import { env } from "./lib/env/client";
 
 const wixClient = createClient({
 	auth: OAuthStrategy({
-		clientId: env.WIX_CLIENT_ID,
+		clientId: env.NEXT_PUBLIC_WIX_CLIENT_ID,
 	}),
 });
 

@@ -11,6 +11,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { TooltipTrigger } from "@/components/ui/tooltip";
 
 import { logout } from "@/features/account/actions/logout";
+import { cn } from "@/lib/utils";
 
 interface NavbarUserProps {
 	handle: ReturnType<
@@ -64,13 +65,16 @@ export function NavbarUser({
 			render={
 				<Link
 					aria-label={label}
-					className={buttonVariants({ variant: "ghost", size: "icon-lg" })}
+					className={cn(
+						buttonVariants({ variant: "ghost" }),
+						"bg-mauve-100/15 text-card hover:bg-mauve-50/25"
+					)}
 					href={href}
 				/>
 			}
 		>
-			<UserIcon aria-hidden="true" className="size-4" />
-			<span className="sr-only">{label}</span>
+			<UserIcon aria-hidden="true" className="size-4" weight="bold" />
+			<span className="text-xs">{label}</span>
 		</TooltipTrigger>
 	);
 }
