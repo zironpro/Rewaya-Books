@@ -1,8 +1,8 @@
 import { currentCart } from "@wix/ecom";
 import { media } from "@wix/sdk";
-import { collections, products } from "@wix/stores";
+import { products } from "@wix/stores";
 
-import { Cart, Collection, Product } from "@/lib/wix/types";
+import { Cart, Product } from "@/lib/wix/types";
 
 export const cartesian = <T>(data: T[][]) =>
 	data.reduce((a, b) => a.flatMap((d) => b.map((e) => [...d, e])), [
@@ -116,26 +116,6 @@ export const reshapeCart = (cart: currentCart.Cart): Cart => {
 			return acc + item.quantity!;
 		}, 0),
 	};
-};
-
-export const reshapeCollection = (
-	collection: collections.Collection
-): Collection => ({
-	path: `/shop/${collection.slug ?? ""}`,
-	handle: collection.slug ?? "",
-	title: collection.name ?? "",
-	description: collection.description ?? "",
-	seo: {
-		title: collection.name ?? "",
-		description: collection.description ?? "",
-	},
-	updatedAt: new Date().toISOString(),
-});
-
-export const reshapeCollections = (
-	wixCollections: collections.Collection[]
-) => {
-	return wixCollections.map(reshapeCollection);
 };
 
 export const reshapeProduct = (item: products.Product): Product => {

@@ -66,6 +66,7 @@ export const NavActions = ({ isLoggedIn, displayName }: NavActionsProps) => {
 				handle={tooltipHandle}
 				isLoggedIn={isLoggedIn}
 			/>
+
 			<TooltipTrigger
 				className="after:absolute after:inset-s-full after:h-full after:w-1"
 				handle={tooltipHandle}
@@ -83,6 +84,7 @@ export const NavActions = ({ isLoggedIn, displayName }: NavActionsProps) => {
 				<HeartIcon aria-hidden="true" className="size-4" weight="bold" />{" "}
 				<span className="text-xs">Wishlist</span>
 			</TooltipTrigger>
+
 			<Suspense
 				fallback={
 					<TooltipTrigger

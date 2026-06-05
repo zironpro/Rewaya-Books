@@ -20,10 +20,10 @@ export async function Navbar({
 	showSearch = true,
 }: NavbarProps) {
 	return (
-		<header className="sticky inset-x-0 top-0 z-40 bg-card/85 shadow-xs backdrop-blur-lg supports-backdrop-blur:bg-card">
+		<header className="sticky inset-x-0 top-0 z-40 bg-card/85 shadow-200 backdrop-blur-lg supports-backdrop-blur:bg-card">
 			<div className="relative h-14 border-b bg-mauve-800">
 				<div className="container flex h-full w-full items-center gap-4 md:gap-8">
-					<div className="flex w-full md:w-1/3">
+					<div className="flex w-full px-2 md:w-1/3">
 						<Link href="/" prefetch={true}>
 							<Logo isDark />
 						</Link>
@@ -31,15 +31,15 @@ export async function Navbar({
 
 					<NavbarSearch showSearch={showSearch} />
 
-					<div className="flex justify-end gap-1 md:w-1/3">
+					<div className="hidden justify-end gap-2 md:flex md:w-1/3">
 						<LanguageSelector className="border border-mauve-200/20 bg-mauve-950 text-card" />
 						<Suspense fallback={<NavActionsFallback />}>
 							<NavbarAuthActions />
 						</Suspense>
 					</div>
 				</div>
-				<div className="absolute top-[calc(100%+1px)] left-0 size-4 rounded-br-full bg-inherit [corner-shape:scoop]" />
-				<div className="absolute top-[calc(100%+1px)] right-0 size-4 rounded-bl-full bg-inherit [corner-shape:scoop]" />
+				<div className="absolute top-[calc(100%+1px)] left-0 size-3 rounded-br-full bg-inherit [corner-shape:scoop]" />
+				<div className="absolute top-[calc(100%+1px)] right-0 size-3 rounded-bl-full bg-inherit [corner-shape:scoop]" />
 			</div>
 
 			{showCategories && <CategoriesNavigation />}

@@ -3,6 +3,7 @@
 @import "shadcn/tailwind.css";
 
 @import "./animations.css";
+@import "./elevations.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -171,7 +172,8 @@
 
 	--primary: oklch(0.4674 0.1893 358.62);
 	--primary-foreground: var(--color-mauve-50);
-	--secondary: --alpha(var(--color-black) / 4%);
+
+	--secondary: --alpha(var(--color-black) / 12%);
 	--secondary-foreground: var(--color-mauve-800);
 
 	--muted: --alpha(var(--color-mauve-800) / 6%);
@@ -233,12 +235,12 @@
 		width: 100%;
 		max-width: 100%;
 		margin-inline: auto;
-		padding-inline: 1rem;
+		padding-inline: 1.25rem;
 
 		/* sm — ≥640px (40rem) */
 		@media (width >= 40rem) {
 			/* max-width: 50rem; */
-			padding-inline: 1.25rem;
+			padding-inline: 1.5rem;
 		}
 
 		/* lg — ≥1024px (64rem) */
@@ -256,7 +258,7 @@
 		/* 2xl — ≥1536px (96rem), 1600px max — wide / product grids */
 		@media (width >= 96rem) {
 			/* max-width: 100rem; */
-			padding-inline: 4rem;
+			padding-inline: 3.5rem;
 		}
 	}
 }

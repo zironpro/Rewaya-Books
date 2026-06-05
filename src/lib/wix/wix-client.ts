@@ -1,5 +1,6 @@
 "use client";
 
+import { items } from "@wix/data";
 import { currentCart } from "@wix/ecom";
 import { members } from "@wix/members";
 import { redirects } from "@wix/redirects";
@@ -17,6 +18,7 @@ export const wixClient = createClient({
 		currentCart,
 		redirects,
 		members,
+		items,
 	},
 	auth: OAuthStrategy({
 		clientId: process.env.NEXT_PUBLIC_WIX_CLIENT_ID as string,

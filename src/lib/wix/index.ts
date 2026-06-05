@@ -6,36 +6,10 @@ import { createClient, OAuthStrategy } from "@wix/sdk";
 import { collections, products } from "@wix/stores";
 
 import { SortKey, WIX_SESSION_COOKIE } from "@/lib/constants";
-import { Collection, Product } from "@/lib/wix/types";
+import { Product } from "@/lib/wix/types";
 
 import { env } from "../env/client";
-import {
-	getApplicationErrorCode,
-	isWixSdkError,
-	reshapeCollection,
-	reshapeCollections,
-	reshapeProduct,
-} from "./helpers";
-
-export async function getCollection(
-	handle: string
-): Promise<Collection | undefined> {
-	const { getCollectionBySlug } = (await getWixClient()).use(collections);
-
-	try {
-		const { collection } = await getCollectionBySlug(handle);
-
-		if (!collection) {
-			return undefined;
-		}
-
-		return reshapeCollection(collection);
-	} catch (error) {
-		if (isWixSdkError(error) && error.code === "404") {
-			return undefined;
-		}
-	}
-}
+import { getApplicationErrorCode, reshapeProduct } from "./helpers";
 
 export async function getCollectionProducts({
 	collection,
@@ -76,32 +50,6 @@ async function sortedProductsQuery(sortKey?: string, reverse?: boolean) {
 		return query.descending((sortKey! as SortKey) ?? "name");
 	}
 	return query.ascending((sortKey! as SortKey) ?? "name");
-}
-
-export async function getCollections(): Promise<Collection[]> {
-	const { queryCollections } = (await getWixClient()).use(collections);
-	const { items } = await queryCollections().find();
-
-	const wixCollections = [
-		{
-			handle: "",
-			title: "Shop All",
-			description: "All products",
-			seo: {
-				title: "All",
-				description: "All products",
-			},
-			path: "/shop" as const,
-			updatedAt: new Date().toISOString(),
-		},
-		// Filter out the `hidden` collections.
-		// Collections that start with `hidden-*` need to be hidden on the search page.
-		...reshapeCollections(items).filter(
-			(collection) => !collection.handle.startsWith("hidden")
-		),
-	];
-
-	return wixCollections;
 }
 
 export async function getProduct(handle: string): Promise<Product | undefined> {

@@ -134,12 +134,21 @@ function Carousel({
 	);
 }
 
-function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
-	const { carouselRef, orientation } = useCarousel();
+function CarouselContent({
+	className,
+	carouselFade,
+	...props
+}: React.ComponentProps<"div"> & { carouselFade?: boolean }) {
+	const { carouselRef, orientation, canScrollNext, canScrollPrev } =
+		useCarousel();
 
 	return (
 		<div
-			className="overflow-hidden"
+			className={cn(
+				"overflow-hidden",
+				carouselFade && canScrollNext && "mask-r-from-90% mask-r-to-100%",
+				carouselFade && canScrollPrev && "mask-l-from-90% mask-l-to-100%"
+			)}
 			data-slot="carousel-content"
 			ref={carouselRef}
 		>
@@ -184,10 +193,9 @@ function CarouselPrevious({
 	return (
 		<Button
 			className={cn(
-				"absolute touch-manipulation rounded-full",
-				!canScrollPrev ? "opacity-0!" : "opacity-100",
+				"absolute touch-manipulation rounded-full transition-opacity",
 				orientation === "horizontal"
-					? "-inset-s-6 top-1/2 -translate-y-1/2"
+					? "-inset-s-3 top-1/2 -translate-y-1/2 md:-inset-s-6"
 					: "inset-s-1/2 -top-12 -translate-x-1/2 rotate-90 rtl:translate-x-1/2",
 				className
 			)}
@@ -216,9 +224,8 @@ function CarouselNext({
 		<Button
 			className={cn(
 				"absolute touch-manipulation rounded-full",
-				!canScrollNext ? "opacity-0!" : "opacity-100",
 				orientation === "horizontal"
-					? "-inset-e-6 top-1/2 -translate-y-1/2"
+					? "-inset-e-3 top-1/2 -translate-y-1/2 md:-inset-e-6"
 					: "inset-s-1/2 -bottom-12 -translate-x-1/2 rotate-90 rtl:translate-x-1/2",
 				className
 			)}

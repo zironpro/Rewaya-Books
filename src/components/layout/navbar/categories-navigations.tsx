@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/carousel";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { getCollections } from "@/lib/wix";
+import { getCollections } from "@/features/collections";
 
 export const CategoriesNavigation = () => {
 	return (
@@ -22,6 +22,12 @@ export const CategoriesNavigation = () => {
 			aria-label="Categories"
 			className="container flex h-10 w-full items-center gap-9"
 		>
+			<Link
+				className="inline-flex h-7 shrink-0 items-center justify-center rounded-sm border border-transparent px-2.5 font-medium text-sm transition-colors duration-700 ease-[cubic-bezier(0.33,1,0.68,1)] hover:border-border hover:bg-muted"
+				href="/shop"
+			>
+				Shop All
+			</Link>
 			<Carousel
 				className="w-full min-w-0"
 				opts={{
@@ -31,7 +37,7 @@ export const CategoriesNavigation = () => {
 					skipSnaps: false,
 				}}
 			>
-				<CarouselContent className="-ms-1">
+				<CarouselContent carouselFade className="-ms-1">
 					<Suspense fallback={<CategoryNavListSkeleton />}>
 						<CategoriesNavigationList />
 					</Suspense>
@@ -40,7 +46,7 @@ export const CategoriesNavigation = () => {
 				<CarouselPrevious size="icon-xs" />
 			</Carousel>
 
-			<div className="flex h-7 flex-1 shrink-0 basis-auto items-center gap-2 rounded-full border border-yellow-500 bg-yellow-300/20 px-2.5 text-yellow-700">
+			<div className="hidden h-6 flex-1 shrink-0 basis-auto items-center gap-2 rounded-full border border-yellow-500 bg-yellow-300/20 px-2 text-yellow-700 md:flex">
 				<TruckIcon weight="fill" />
 				<p
 					className="text-[0.675rem] *:font-bold"

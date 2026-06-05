@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 
 export const languageOptions = locales.map((locale) => ({
 	value: locale,
-	label: `${localeConfig[locale].label} (${localeConfig[locale].nativeLabel})`,
+	label: localeConfig[locale].nativeLabel,
 }));
 
 export interface LanguageSelectorProps {
@@ -23,9 +23,9 @@ export interface LanguageSelectorProps {
 
 export function LanguageSelector({ className }: LanguageSelectorProps) {
 	return (
-		<Select items={languageOptions}>
+		<Select defaultValue="en" items={languageOptions}>
 			<SelectTrigger
-				className={cn("w-28", className)}
+				className={cn("w-24", className)}
 				data-name="language-selector"
 				dir="ltr"
 				size="sm"

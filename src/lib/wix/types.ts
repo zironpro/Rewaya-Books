@@ -49,7 +49,9 @@ export type Collection = {
 	title: string;
 	description: string;
 	seo: SEO;
+	image?: string;
 	updatedAt: string;
+	productsCount: number;
 	path: string;
 };
 
