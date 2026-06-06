@@ -1,3 +1,4 @@
+import { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -27,7 +28,7 @@ export const BundlesPageView = async () => {
 
 					return (
 						<div key={item._id}>
-							<Link href={`/bundles/${item._id}`}>
+							<Link href={`/bundles/${item._id}` as Route}>
 								<div className="relative aspect-4/5 bg-card">
 									{image ? (
 										<Image

@@ -1,3 +1,4 @@
+import { Route } from "next";
 import Link from "next/link";
 
 import { GridItem } from "@/components/layout/grid";
@@ -17,7 +18,7 @@ export default function ProductGridItems({
 				<GridItem className="animate-fadeIn" key={product.handle}>
 					<Link
 						className="relative inline-block h-full w-full"
-						href={`/product/${product.handle}`}
+						href={`/product/${product.handle}` as Route}
 						prefetch={true}
 					>
 						<GridTileImage

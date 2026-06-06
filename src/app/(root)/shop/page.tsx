@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { Grid } from "@/components/layout/grid";
 
 import ProductGridItems from "@/features/products/products-grid";
@@ -9,9 +11,19 @@ export const metadata = {
 	description: "Search for products in the store.",
 };
 
-export default async function SearchPage(props: {
+interface SearchParamsProp {
 	searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
+}
+
+export default function SearchPage(props: SearchParamsProp) {
+	return (
+		<Suspense>
+			<ShopPageContent searchParams={props.searchParams} />
+		</Suspense>
+	);
+}
+
+async function ShopPageContent(props: SearchParamsProp) {
 	const searchParams = await props.searchParams;
 	const { sort, q: searchValue } = searchParams as { [key: string]: string };
 	const { sortKey, reverse } =
@@ -19,8 +31,6 @@ export default async function SearchPage(props: {
 
 	const products = await getProducts({ sortKey, reverse, query: searchValue });
 	const resultsText = products.length > 1 ? "results" : "result";
-
-	console.log(products);
 	return (
 		<section className="container py-6">
 			{searchValue ? (

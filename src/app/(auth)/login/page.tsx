@@ -16,7 +16,7 @@ interface LoginPageProps {
 
 function getReturnTo(
 	searchParams: { [key: string]: string | string[] | undefined },
-	fallback = "/profile"
+	fallback = "/"
 ) {
 	const value = searchParams[AUTH_RETURN_TO_PARAM];
 	const returnTo = Array.isArray(value) ? value[0] : value;
